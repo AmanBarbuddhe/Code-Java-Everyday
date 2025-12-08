@@ -1,4 +1,4 @@
-import java.io.*;
+//import java.io.*;
 import java.util.*;
 
 public class Scan {
@@ -14,6 +14,8 @@ public class Scan {
         int b = sc.nextInt();
 
         System.out.println("Sum of a and b is " + (a+b));
+
+        sc.close();
 
 
     }
