@@ -12,7 +12,7 @@ public class Two_Dimensional_Array {
         System.out.println("Enter array element :");
 
         for(int i = 0 ; i < arr.length ; i++){
-            for(int j = 0 ; j < arr[i].length ; j++){
+            for(int j = 0 ; j < arr[i].length ; j++){   //arr[i].length gives lenght of row i.e. how many column in that row
                 arr[i][j] = Integer.parseInt(br.readLine());
             }
             
