@@ -25,6 +25,14 @@
  * 
  */
 
+  /*
+   use case ---> in cricket match as soon as ball is balled , changes are automatically reflected in scoreboard , without refreshing the page 
+   this is because change has been done in database which is getting reflected on scoreboard.
+  */
+
+
+
+
 package com.tca;
 
 import java.sql.Connection;
