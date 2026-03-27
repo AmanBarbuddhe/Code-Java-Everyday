@@ -59,7 +59,9 @@ public class SavePointDemo {
             int i = stmt.executeUpdate(cmd4);
             int j = stmt.executeUpdate(cmd5);
             
-            if(i==0){
+            if(i==0){       // if after updating we get msg like "UPDATE 0" ==> failure i.e. no updation because might be the field you want to update in , is not there or any other reason"
+            			   // and if msg comes "UPDATE 1" ==> one field is updated , "UPDATE 2" ==> 2 fields are updated , etc , etc.
+            			  // so we are checking for that 0(the one which comes on failure while updation) here in i and j
             	
             	System.out.println("RollBack to starting");
             	con.rollback();                                 // role back to starting
