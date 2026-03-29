@@ -1,0 +1,176 @@
+--> Program in running mode is called a process(ex : vs code is a program , and if I am using it then it becomes a process)
+
+--> Running two program simultaneously is called parallel or simultaneous execution 
+
+Multitasking : (1) When more than one processes/program are executing simultaneously then it is called as Multitasking.
+            Need of Multitasking --> (a) Performance of application is increased
+                                     (b) Efficient use of cpu and IO resources
+
+Multi-Threading
+===============
+
+    Uni-Threading
+    =============
+                                       --> It is uni-threading because 1st display() will execute and after completion 
+    void display(){                        of display() method , show() method will execute i.e. next process
+                                           starts only on completion of previous process
+        5 times IND
+
+    }
+
+    void show(){
+
+        5 times AUS
+
+    }
+
+    main(){
+
+        display();
+        show();
+
+    }
+
+                     JVM
+    +------------------------------------+
+    | JVM has a program called thread    | 
+    | manager (TM)                       |
+    |                                    |
+    |        +----------------+          |
+    |        |                |          |
+    |        | Thread manager |          |
+    |        +----------------+          |                   
+    +------------------------------------+
+                   |
+                   |
+                   |  JVM calls thread manager , when a java pgm(Demo.java) is executed , creates thread  and names it ,
+                   |  main - thread (this thread is made by thread manager) , and tells the main - thread to execute
+                   |  Demo.class
+                   |
+                   |
+                   |
+  Demo.class   main-thread
+
+
+
+                            Multi - Threading
+                           ==================
+   
+    void display() {                                      void show()   {
+
+        5 times IND                                         5 times AUS                                           
+        
+    }                                                   }
+
+    
+                 main(){
+                    display();                   now this two methods will run simultaneously
+                    show();                      output : IND
+                 }                                        AUS
+                                                          IND
+                                                          AUS
+                                                          IND
+                                                          AUS
+                                                          IND
+                                                          AUS
+                                                          IND
+                                                          AUS
+
+
+
+
+
+                     JVM
+    +------------------------------------+
+    | JVM has a program called thread    | 
+    | manager (TM)                       |
+    |                                    |
+    |        +----------------+          |
+    |        |                |          |
+    |        | Thread manager |          |
+    |        +----------------+          |                   
+    +------------------------------------+
+                   |
+                   |
+                   |  JVM calls thread manager , when a java pgm(Demo.java) is executed , creates thread  and names it ,
+                   |  main - thread (this thread is made by thread manager) , and tells the main - thread to execute
+                   |  Demo.class
+                   |
+                   |
+                   |
+  Demo.class   main - thread          [main,5,main]
+               |           |
+               |           |
+               |           |
+               |           |
+               |           |          Main thread will create two different threads , that will run simultaneously     
+               |           |
+               |           |          and as programmer we are creating them by doing setname = IND and setname = AUS
+               |           |
+               |           |
+               |           |
+         IND - THREAD    AUS - THREAD   
+         [IND,5,main]     [AUS,5,main]                                [thread_name , thread_priority , thread_group]   
+
+
+
+                                                                    priority is default 5 , min is 1 and max is 10
+
+if name not given to threads then 1st thread created is named --> Thread-0(here we have named it Ind-Thread)
+                                  2nd thread created is named --> Thread-1(here we have named it Aus-Thread) and so on 
+
+
+if asked what is main:
+--> if we are discussing multi-threading , then main is a thread and normally then main is a method
+
+Multi-threading : 2 parts(methods) of a single program are executing simultaneously is called multi-threading
+
+ex : youtube.com 
+--> because of multi-threading both display and buffering are done simultaneously
+--> but if multi-threading was not there then , 1st video would have been downloaded i.e. buffering and then ready to see i.e. display 
+
+Buffering in YouTube refers to the process where a portion of the video is preloaded (downloaded in advance) , 
+before or during playback so that it can play smoothly without interruptions.
+
+
+public class Demo{
+    public static void main(String args[]){
+
+        Thread t = Thread.currentThread();      // to get information about the current thread running
+        t.setName("SACHIN");  // to rename thread name          
+
+        System.out.println(t);               o/p --> without t.setName("SACHIN"); is,
+                                                      [#1,main,5,main]
+        System.out.println("Hello World");
+                                             o/p --> with t.setName("SACHIN"); is,
+                                                      [#1,SACHIN,5,main]
+    }
+}
+                                                      #1 --> 1st thread 
+                                                      main --> thread name 
+                                                      5 --> thread priority
+                                                      main --> thread group 
+
+
+System.out.println(t.getName());                 o/p --> main (without renaming i.e. without t.setName("SACHIN"); )
+System.out.println(t.getPriority());             o/p --> 5
+System.out.println(t.getThreadGroup());          o/p --> java.lang.ThreadGroup[name=main,maxpri=10]
+
+                                                        name=main is group name "AND" maxpri is max-priority=10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
