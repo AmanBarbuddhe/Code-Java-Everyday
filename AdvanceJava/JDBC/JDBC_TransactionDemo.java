@@ -61,6 +61,8 @@ Write in A  -->     W(B)
 			ps1.executeUpdate();
 			
 			Integer.parseInt("INDIA"); // this line is written to generate exception so that our codes to catch block and program terminates
+									   // it gives exception because we are trying to convert a string INDIA into an integer
+
 			
 			ps2 = con.prepareStatement("UPDATE account SET balance = balance + 500 WHERE acc_no = 102");
 			ps2.executeUpdate();
