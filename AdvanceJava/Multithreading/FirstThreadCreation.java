@@ -274,12 +274,158 @@ public class FirstThreadCreation {
 /*
 
     IndiaThread and AustraliaThread both are doing same work i.e. printing some msg , and this could have done in
-    a single class. --> this is generic coding , How this is done --> 
+    a single class. --> this is generic coding , How this is done --> it is in PrintTextThread_Demo.java
 
 
 
 
 */
 
+/*  
+ 
+ we can call run() method without start() method , but then we will not be able to see multi-threading behaviour
+ 
+ i.e. it will behave just like a display() method , means first code of run will execute and then , the code after 
+ t1.run() will execute which is in main method i.e. parallelism will be lost
+ 
+ ex:
 
+ class IndiaThread extends Thread{
+
+    public void run(){       
+        
+        
+        try{
+            for(int i = 1 ; i<=5; i++){
+                System.out.println("I am in run");
+                Thread.sleep(1000);         
+            }
+
+        }
+
+        catch(InterruptedException ie) {            
+
+            ie.printStackTrace();
+
+        }
+    }
+}
+
+public class FirstThreadCreation {
+    public static void main(String args[]){
+
+        PrintTextThread t1 = new PrintTextThread();
+        t1.run();
+
+            try{
+
+        for(int i=1;i<=5;i++){
+            System.out.println("Main-Thread");
+            Thread.sleep(1000);
+        }
+        
+    }
+    
+    catch(InterruptedException e){
+        e.printStackTrace();
+      }
+
+    }
+}
+
+
+OutPut -->        I am in run
+                  I am in run
+                  I am in run
+                  I am in run
+                  I am in run
+                  Main-Thread
+                  Main-Thread
+                  Main-Thread
+                  Main-Thread
+                  Main-Thread  
+
+ 1st run() will get executed and then on its completion , main() will execute its code 
+ 
+ 
+ */
+
+ /*
+ 
+    class IndiaThread extends Thread{
+
+    public void run(){       
+        
+        
+        try{
+            for(int i = 1 ; i<=5; i++){
+                System.out.println("I am in run");
+                Thread.sleep(1000);         
+            }
+
+        }
+
+        catch(InterruptedException ie) {            
+
+            ie.printStackTrace();
+
+        }
+    }
+}
+
+public class FirstThreadCreation {
+    public static void main(String args[]){
+
+        PrintTextThread t1 = new PrintTextThread();
+        t1.start();
+
+            try{
+
+        for(int i=1;i<=5;i++){
+            System.out.println("Main-Thread");
+            Thread.sleep(1000);
+        }
+        
+    }
+    
+    catch(InterruptedException e){
+        e.printStackTrace();
+      }
+
+    }
+}
+ 
+Q. Why , always Main-Thread gets executed even when , t1.start() is called above it?
+
+Main-Thread <-----------
+I am in run
+I am in run
+Main-Thread
+I am in run
+Main-Thread
+I am in run
+Main-Thread
+I am in run
+Main-Thread
+ 
+--> Because , JVM takes time to build configuration for start()
+i.e. to run the thread parallel , it has to create the environment i.e. to give the thread its stack , its heap , its registor , etc...
+
+and here it is getting printed 1st only one time because we have added sleep(1000) there that gives time JVM to setup start()
+if we remove sleep(1000) from main-thread , then Main-Thread will get printed 5 times 1st , because it takes very less time to print Main-Thread just 5 times 
+
+o/p on removing sleep(1000) from Main-Thread
+
+Main-Thread
+Main-Thread
+Main-Thread
+Main-Thread
+Main-Thread
+I am in run
+I am in run
+I am in run
+I am in run
+I am in run
+
+*/
 
