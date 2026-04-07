@@ -47,7 +47,7 @@ class Resource {
 
     int count = 0;
 
-    public  void increment(){    // synchronized means , until t1 completes using the resource , t2 will not use the resource
+    public synchronized void increment(){    // synchronized means , until t1 completes using the resource , t2 will not use the resource
         count ++; // critical section 
     }
 
@@ -67,9 +67,9 @@ class Resource {
        System.out.println("Hello");    // now this can be used by both threads at a time
 
 
-       //synchronized(this){
+       synchronized(this){
         count++; // critical section  --> But this will be used by only one thread at a time
-       //}
+       }
 
 
        System.out.println("Byeeeee");  // now this can be used by both threads at a time
