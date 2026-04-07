@@ -23,10 +23,10 @@ because browser internally fetch its "IP Address" and fetches data of that serve
                                             |        |              |             |                  |                                          +---------+
                                             |        |              |             |                  |
                                             |        |              |             |                  |
-                                            |        +----------------------------+                  |                                    machines connected to network
-                                            |                                                        |                                   --> here we  have considered only two
-                                            |                                                        |                                       but in reality many machines are 
-                                            |                                                        |                                       connected to a network
+                                            |        +----------------------------+                  |                   machines connected to network
+                                            |                                                        |                   --> here we  have considered only two
+                                            |                                                        |                       but in reality many machines are 
+                                            |                                                        |                       connected to a network
                                             +--------------------------------------------------------+
 
 
