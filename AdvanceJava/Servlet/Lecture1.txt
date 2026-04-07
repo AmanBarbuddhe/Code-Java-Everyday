@@ -56,3 +56,146 @@ Q. What is a Resource?
 
 
 
+
+
+
+                                                                                                             Server
+                                                                                               +-------------------------------------+          
+                                PACKET                                                         |                                     |
+                                                                                               |                                     |
+     Client            header           body                                                   |                                     |                  Database
++---------------+    +------------------------------+                                          |                                     |                +-----------+
+|               |    | @  URL      |                |                                          |                                     |                |           |
+|               |    | $  GET      |                |                                          |                                     |                |           |
+|               |    +------------------------------+  +--------------+                        |                                     |                |           |
+|               |--------------------------------------|   Network    |------------------------|                                     |----------------|           |
+|               |    +------------------------------+  +--------------+                        |                                     |                |           |
+|               |    |        |                     |                                          |                                     |                |           |
++---------------+    |        |                     |                                          |                                     |                |           |
+                     +------------------------------+                                          |                                     |                +-----------+
+                      header         body                                                      |                                     |
+                                                                                               |                                     |
+                                                                                               +-------------------------------------+
+
+
+
+--> When we open browser and type www.instagram.com , on clicking enter we come to instagram site , a request is send 
+to the server , request is created or a packet is created and the packet has two part , header and body , this packet is send to 
+server it is processed and a response is send as a packet. 
+
+--> the Client here is browser which is users machine it also has a IP address , Server(which is also a machine) 
+in the network also has a IP address.
+
+--> when a request is generated , a packet is sent from Client to Server , that packets header contains 
+IP address of Sender(here IP address of client is sent(here I have denoted it : @)) and Receivers IP address
+(here IP address of Server which is Receiver(here I have denoted it : $)) , it also contains URL which has been 
+searched on browser(client) to know what we want from that site , and it conatins type of How Client is requesting
+server which "GET" or "POST"
+                                                 header            body
+this is how header looks like --->           +-------------------------------------------+
+                                             |  @      URL      |                        |
+                                             |  $      GET/POST |                        |
+                                             +-------------------------------------------+
+@--> IP address of client(sender)
+$--> IP address of receiver(receiver)
+URL
+GET/POST --> types in which requesting is denoted
+
+Now as we are doing it in URL type is get 
+
+when we do login in instagram using username and password that requesting type is "POST"
+
+GET requesting : when the request send need not be private i.e. everyone can know it (data exposed --> okay)
+POST requesting : when the requesting send should be private i.e. authorized person should only be able to know it(data exposed not okay)
+
+network has many machines like server , so if username and password requesting is not POST
+other machines will also know what is the username and password
+
+
+now lets say our URL is http://technocompacademy/RegistrationForm 
+
+--> Let's this URL opens a registration form , after filling all details when we click save , a request is send
+in form of packet and all the filled data is visible in body , now this packet with the data goes to server,
+where URL is http://localhost/Save 
+
+
+
+
+                                                                                                             Server
+                                                                                               +--------------------------------------+          
+                                PACKET                                                         |   |  +------------------------+      |
+                                                                                               |   |  | Servlet - Engine       |      | 
+     Client            header           body                                                   |   |  +------------------------+      |                  Database
++---------------+    +------------------------------+                                          |   |                                  |                +-----------+
+|           | H |    | @  URL      |101 AAA 60      |                                          | H |     Save.java     Save.class     |                |           |
+| rno : 101 | T |    | $  GET      |                |                                          | T |    +----------+ +----------+     |                |           |
+| name: AAA | T |    +------------------------------+          +--------------+                | T |    |          | |          |     |                |           |
+| per : 60  | P |------------------------------------------    |   Network    |----------------| P |    |          | |          |     |----------------|           |
+|           |   |    +-------------------------------------+   +--------------+                |   |    |          | |          |     |                |           |
+|    save   |   |    |  $      |Data is saved successfully |                                   |   |    |          | |          |     |                |           |
++---------------+    |  @      |                           |                                   |   |    +----------+ +----------+     |                |           |
+                     +-------------------------------------+                                   |   |   save.java , sava.class ,       |                +-----------+
+                      header         body                                                      |   |   delete.java , delete.class     |
+                                                                                               |   |   like this many pgms are there  |
+                                                                                               |   |    on the server.                |
+                                                                                               +--------------------------------------+
+
+
+response is generated in the form of a html file
+ex: <HTML>
+    <Body>
+          Data is saved successfully
+    </body>
+    </HTML>
+
+
+After response package is send successfully 
+   
+       Client
++-------------------+ 
+|  Data is saved    |
+|   successfully    |
+|                   |
+|                   | 
+|                   |
+|                   | 
++-------------------+
+
+
+
+Note : Request and Response will be in html only , because while executing any program the protocol we are using is HTTP
+       HTTP(Hyper Text Tranfer Protocol)
+
+
+http://technocompacademy/RegistrationForm --> technocompacademy cha RegistrationForm
+http://instagram.com/AmanBarbuddhe --> instagram.com cha AmanBarbuddhe(any user on instagram)
+http://localhost/Save --? localhost cha Save 
+
+This all RegistrationForm , AmanBarbuddhe , Save --> are all resources
+
+There is a program on server side Save.java
+--> it is a java code kept on a server , and it will run on server side only , then such program is not called
+a standalone program it is called as a servlet program
+
+Q. What is servlet?
+A program of java which is kept at server , it will run/execute on server , and output will be kept in the packet 
+as response and the output will be printed by client such programs are called servlet program
+
+To run servlet we have Servlet Engine / Servlet Container that is used to run servlet program kept on the Container,
+it gets installed with servlet itself
+
+
+This everything Save , about or clicking any button is to send request to the server side , after clicking the button
+the result we get is called "Response" which is send by server to client in the form of packet
+
+
+
+
+
+
+
+
+
+
+
+
