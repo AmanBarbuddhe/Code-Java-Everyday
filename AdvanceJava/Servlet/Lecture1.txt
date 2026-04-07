@@ -1,0 +1,58 @@
+--> instagram.com(or any other website) is a server , and its a domain name , 
+because browser internally fetch its "IP Address" and fetches data of that server whose "IP Address" was fetched earlier
+
+                                                                
+                                                                    DNS server
+                                            +--------------------------------------------------------+
+                                            |                                                        |
+                                            |                                                        |
+                                            |                                                        |
+                                            |                                                        |                                          198.97.45.12
+                                            |                                                        |                                         +-----------+
+                                            |                                                        |                             +---------->| Instagram |
+                                            |                                                        |                             |           +-----------+
+        Browser                             |                                                        |                             |
+ +------------------+                       |        +----------------------------+                  |                             |
+ | www.instagram.com|      +---------+      |        |    Domain    |    IP       |                  |       +-------+             |
+ |------------------|------| Network |------|        |     name     |  Address    |                  |-------|Network|-------------|
+ |                  |      +---------+      |        |--------------|-------------|                  |       +-------+             |
+ +------------------+                       |        |              |             |                  |                             | 
+                                            |        | instagram.com|198.97.45.12 |                  |                             |           167.87.98.86
+                                            |        |              |             |                  |                             |            +---------+
+                                            |        | tca.com      |167.87.98.86 |                  |                             +----------->| tca.com |
+                                            |        |              |             |                  |                                          +---------+
+                                            |        |              |             |                  |
+                                            |        |              |             |                  |
+                                            |        +----------------------------+                  |                                    machines connected to network
+                                            |                                                        |                                   --> here we  have considered only two
+                                            |                                                        |                                       but in reality many machines are 
+                                            |                                                        |                                       connected to a network
+                                            +--------------------------------------------------------+
+
+
+
+--> Domain name , and Ip address(it is unique for each domain name) are stored in a table , and this table 
+is already stored/configured on a machine , that machine is called DNS server
+
+--> when we type www.instagram.com(where instagram.com is the domain name) we are generating a request and 
+through network that request goes to DNS server , there it matches domain name and "IP Address" is fetched , 
+and then again through network , it goes to the machine(Instagram , tca , facebook , etc. these are all called 
+machines and there are many machines connected to a network) which has the same "IP Address" and then accesses 
+the data/content.
+
+--> Browser/mobiles are clients 
+--> where we type www.instagram.com on browser is called Address bar , and whatever we type is called "URL" --> https://www.instagram.com/
+
+Q. What is URL?
+--> It is Uniform Resource Locator
+
+--> Uniform means continuous i.e. from start to beginning there are no spaces in a URL
+--> we use URL to find a Resource
+--> Locator means , locating the Resource on the server
+
+Q. What is a Resource?
+--> Any file such as program ,pdf ,image ,pdf ,etc. kept on a server is called as "Resource"
+
+
+
+
