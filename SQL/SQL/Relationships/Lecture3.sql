@@ -120,7 +120,7 @@ ajdb20=# select * from student_teacher;
 --> Due to DELETE CASCADE
 
 -->******************************************************************************
---> Deleted prvious records and added same records again
+--> Deleted previous records and added same records again --> table records
 
 Q. Find no. of people from PUNE
 --> Ans = 3 (2 students from pune and 1 teacher from pune)
