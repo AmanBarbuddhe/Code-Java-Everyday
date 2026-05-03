@@ -52,6 +52,7 @@ Q. What is URL?
 
 Q. What is a Resource?
 --> Any file such as program ,pdf ,image ,pdf ,etc. kept on a server is called as "Resource"
+--> Ex: course.php , First.java , AJ_course.pdf , logo.png , intro.mp4
 
 
 
@@ -121,11 +122,11 @@ where URL is http://localhost/Save
 
 
 
-                                                                                                             Server
+                                                                                                         Web Server(Tomcat)
                                                                                                +--------------------------------------+          
-                                PACKET                                                         |   |  +------------------------+      |
-                                                                                               |   |  | Servlet - Engine       |      | 
-     Client            header           body                                                   |   |  +------------------------+      |                  Database
+    HTTP Client                 PACKET                                                         |   |  +------------------------+      |
+                            HTTP Request                                                       |   |  | Servlet - Engine       |      | 
+  Client(Browser)      header           body                                                   |   |  +------------------------+      |                  Database
 +---------------+    +------------------------------+                                          |   |                                  |                +-----------+
 |           | H |    | @  URL      |101 AAA 60      |                                          | H |     Save.java     Save.class     |                |           |
 | rno : 101 | T |    | $  GET      |                |                                          | T |    +----------+ +----------+     |                |           |
@@ -137,7 +138,7 @@ where URL is http://localhost/Save
                      +-------------------------------------+                                   |   |   save.java , sava.class ,       |                +-----------+
                       header         body                                                      |   |   delete.java , delete.class     |
                                                                                                |   |   like this many pgms are there  |
-                                                                                               |   |    on the server.                |
+                             HTTP Response                                                     |   |    on the server.                |
                                                                                                +--------------------------------------+
 
 
@@ -188,13 +189,18 @@ it gets installed with servlet itself
 This everything Save , about or clicking any button is to send request to the server side , after clicking the button
 the result we get is called "Response" which is send by server to client in the form of packet
 
+--> Server(call it HTTP server or Web Server) we are using here is Tomcat given by Apache , 
+    and our client is Browser also called HTTP Client
 
-
-
-
-
-
-
+--> HTML , CSS and JavaScript are client side technologies
+--> Java , php , python are Server - Side technology
+--> Header stores browser information and Body stores page data
+--> HTTP will trap request and response
+--> Web Server --->  Server name                vendor
+                    ------------------------------------
+                       Tomcat                   Apache
+                       glassfish                Sun Microsystem
+                       WebLogic                 Oracle
 
 
 
