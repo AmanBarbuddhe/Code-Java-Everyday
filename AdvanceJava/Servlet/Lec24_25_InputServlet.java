@@ -254,8 +254,20 @@ File -- New -- Dynamic Web Project -- src -- main -- right click on webapp -- ne
 -->
  
  
- 
- 
+http://localhost:8080/ASS02-GreetApplication/user
+--> this is the url when request method is POST
+
+http://localhost:8080/ASS02-GreetApplication/user?uname=Aman
+------------------------------------------------- ----------
+                       |							   |
+					  URL							 input
+					  
+--> this is the url when request method is GET , here our data(Aman) is getting exposed
+
+ Therefore if dont want our data to get exposed in network then we use POST method
+
+ Note : One servlet can have both GET and POST method
+ ---- 
 */
 
 
