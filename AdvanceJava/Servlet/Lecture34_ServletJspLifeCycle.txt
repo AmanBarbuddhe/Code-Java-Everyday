@@ -1,0 +1,143 @@
+
+********************* Servlet-JSP Lifecycle(internal realtionship of JSP and Servlet) *********************
+     
+server understands what to call servlet or jsp from the URL
+
+URL --> https://localhost:8080/ASS01/First --> call to servlet
+        https://localhost:8080/ASS01/Demo.jsp --> call to jsp
+
+
+
+when we downloaded our server(apache tomcat) servlet engine(container) and JSP engine(container) was downloaded with it
+proof that servlet and jsp engine is downloaded : apache tomcat folder --> lib --> servlet-api.jar , jsp-api.jar
+
+
+source address(SI) and destination address(CI)
+
+                            https://localhost:8080/ASS01/First this request will strike the server and server sees the url and understands it is call to Servlet
+                                          |              
+                                    +-------------------------------+
+            Client                  | SI URL            |   DATA    |                                       server(TomCat)
++------------------------------+    | DI Request Method |           |     +---------------------------------------------------------------------------------------+
+|                              |    +-------------------------------+     |                                                                                       |
+|                              |----------------------------------------> | +-----------------------+                                Servlet Loading(First.class) |  -----------------> The process of loading the class(which class to load this information is in URL) into server is called servlet loading
+|                              |                                          | | Servlet Engine        |                                              |              |  
+|                              |                                          | | (container)           |       Heap                                   | init()       |  -----------------> Servlet engine needs to call doPost or doGet but it cannot call it directly because it has two parameters request and 
+|                              |                                          | |                       |----------------------+                       |              |                     response therefore two objects are created on heap , this init() method is used to create objects(request and response on heap) 
+|                              |                                          | |                       |                      |            Servlet Initialization    |                     and this process is called Servlet Initialization 
+|                              |                                          | |                       |  Request    Response |                       |              |  
+|                              |                                          | |                       |                      |                       | service()    |   ----------------> Now the objects are created now we have to decide that , whom to send this two objects? to doGet or doPost this decision is made  
+|                              |                                          | +-----------------------+----------------------+                       |              |                     by service() method this phase is called Processing Request 
+|                              |                                          |                                                              Processing Request       |   
+|                              |                                          |                                                                        |              |   
+|                              |                                          |                                                                        |              |  
+|                              |              Response                    |                                                                        |              |  
+|                              |<-----------------------------------------|--------------------------------------------------------------Generating Response      |  
+|                              |                                          |                                                                        |destroy()     |  
+|                              |                                          |                                                                 Servlet Destroy       |   -----------------> In this phase the Request and Response objects are free'ed
+|                              |                                          |                                                                                       |  
+|                              |         Request                          |                                                                                       |  
+|                              |----------------------------------------->| +-----------------------+ (Now this .class file goes to servlet engine and the whole servlet engine process gets repeated)                                                              
++------------------------------+  +-------------------------------+       | |  JSP Engine           |   Demo_jsp.class                                            |  
+           |                      | SI URL            |   DATA    |       | |  (container)          |        ^                                                    |  
+           |                      | DI Request Method |           |       | |                       |        |                                                    |                     
+           |                      +-------------------------------+       | |                       |        | (Compilation)                                      |  
+           |                               |                              | |(JSP File)             |        |                                                    |  
+           |                               |                              | |Demo.jsp  -------------|-> Demo_jsp.java                                             |  --------------> Demo.jsp is loaded in RAM for execution
+           |                 https://localhost:8080/APP01/First           | +-----------------------+   (Servlet File)                                            |  
+           |                 this request will strike the server          |           |                                                                           |  
+           |                 and server sees the url and understands      |   jsp engine translates this Demo.jsp                                                 |  
+           |                 it is call to Servlet                        |   into Demo_jsp.java                                                                  |  
+           |                                                              |                                                                                       |   
+           |                                                              |                                                                                       |  
+           |  response of jsp , this will be given by servlet engine      |                                                                                       |  
+           |<-------------------------------------------------------------|                                                                                       |          
+              as Demo_jsp.class goes to servlet engine to repeat the      |                                                                                       |      
+              entire process                                              |                                                                                       |    
+                                                                          |----------------------------------------------------------------------------------------
+                                                                          |     +---------------------+         +----------------------------+                    |  
+                                                                          |     |First.java First.html|         |Demo.jsp    Demo_jsp.java   |                    |             
+                                         Many Projects------------------->|ASS01|First.class web.xml  |    APP01|            Demo_jsp.class  |                    |  
+                                         on Disk of                       |     +---------------------+         +----------------------------+                    |  
+                                         Server                           +---------------------------------------------------------------------------------------+        
+                                                                                            |                                     |  
+                                                                                            |                               this new file Demo_jsp.java
+                                                                                            |                               is created after jsp engine 
+                                                                                            |                               translates Demo.jsp
+                                                                                    Disk of Server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
