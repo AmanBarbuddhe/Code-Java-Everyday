@@ -1,0 +1,152 @@
+Java Server Pages(JSP)
+----------------------
+
+
+      First.jsp                              First_jsp.java
++---------------------+                  +---------------------+                       First_jsp.class   
+|                     |                  |                     |                      +---------------+
+|     HTML tags       | Page Translator  |                     | Java Compiler        |               |  
+|        and          |----------------->|   Java Code         |--------------------->| Byte Code     |  
+|     JSP Tags        |                  |                     |                      |               |  
+|                     |                  |                     |                      +---------------+
++---------------------+                  +---------------------+
+
+Q. What is JSP?
+---------------
+
+--> JSP is a server-side technology.
+
+--> JSP is embedded into HTML(i.e. JSP tags inside HTML tags)--------------------------------------------------------->   <HTML>
+                                                                                                                          <BODY>  
+                                                                                                                                  <H1> TCA </H1>                      
+                                                                                                                                  <%> -------------------------------->             
+                                                                                                                                        out.println("Hello");         |----> This tag inside which we write java code is called scriplet tag
+                                                                                                                                  <%> -------------------------------->        
+                                                                                                                           <HTML>
+                                                                                                                           <BODY> 
+
+--> JSP tags have Java Code , so we can say that JSP is used to generate Dynamic Web-Page
+
+--> Implicit objects : out , request , response.....,etc. (this are called Implicit because there are inbuild in JSP engine)
+
+How to create jsp files?
+-----------------------
+
+in eclipse:
+
+new --> dynamic web project --> src --> main --> right click on webapp --> new jsp file
+
+<--------------------------------- First.jsp ---------------------------------------------------------------------->
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <!-- UTF-8 means we can display any language or emojis in output because jsp supports UTF , out.println("Hello " + un); means instead of Hello we can write any language/emoji's here and it will get displayed  -->
+<%@ page import="java.util.Date, java.util.ArrayList, java.util.List " %> <!-- So that we can use Date class and ArrayList -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+		<!--  Header Logic -->
+ 		<h1> Techno Comp Academy </h1>
+		<hr> <!-- Horizontal Line -->
+		
+		<%-- Logic to Print message in JSP --%>  <!--Used to write comment in JSP,this comments are not visible when we do inspect on web-page and it is kept invisible to keep "Processing Logic" safe and hidden from attackers/hackers-->
+		<% 
+		    // Processing Logic --> in this we can write java code 
+		
+		    /*
+		    
+		    int a = 3;
+		    int b = 5;
+		    int ans = a+b;    // addition logic
+			
+		    out.println("Hello World :"+ans);
+		    
+		    */
+		    
+		    List<String> L = new ArrayList<>();
+		    L.add("Pune");
+		    L.add("Mumbai");
+		    
+		    String un = request.getParameter("un");
+		    
+		    Date d = new Date();
+		    int hr = d.getHours(); 
+		    String msg = "";
+		    
+		    if(hr<12)
+		    	msg="Good Morning";
+		    else if (hr<14)
+		    	msg="Good Afternoon";
+		    else
+		    	msg="Good Evening";
+		    
+		    out.println(msg + "," + un + " -->" + L);
+		
+		%>
+</body>
+</html>
+
+
+<--------------------------------- First.html ---------------------------------------------------------------------->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form method="GET" action="./First.jsp">  <!-- action="./First.jsp" this directs us to First.jsp page -->
+	
+	Enter User Name : <input type ="text" name="un"><br>
+	<input type="submit" value="Send">
+	
+	</form>
+
+</body>
+</html>
+
+<!-- 
+
+
+			First.html                                                         [Two objects created by jsp engine]  
+  +---------------------------------+
+  |									|                                  (request object)          (response object)
+  |	Username : Aman					| (request send in packets)         un = Aman
+  |									|  un = Aman
+  |		+----+						|----------------------------
+  |		|send|						|
+  |		+----+		      			|
+  |									|
+  +---------------------------------+
+
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
