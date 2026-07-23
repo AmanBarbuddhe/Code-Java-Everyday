@@ -1,0 +1,166 @@
+Q.Write a JSP script to accept First name and last name on Page 1 , Academic details on Page 2 and Display Marksheet
+on third page.
+
+
+        Page1.html                                                    Page2.jsp                                                            Page3.jsp
++---------------------------------+                          +-------------------------------------+                       +------------------------------------------+
+|                                 |     Request Object       |                                     |   Request Object      |  Marksheet                               |
+|First Name : Aman                |                          |  Percentage : 84.83                 |                       |                                          |
+|                                 |  First Name : Aman       |  Grade : Distinction                | Percentage : 84.83    |  First Name : Aman                       | 
+|Last Name : Barbuddhe            |  Last Name : Barbuddhe   |                                     | Grade : Distinction   |  Last Name : Barbuddhe                   |
+|                                 |------------------------->|                                     |---------------------->|                                          |
+|    +----+                       |                          |         +------+                    |                       |                                          |
+|    |Next|                       |                          |         |Submit|                    |                       |  Percentage : 84.83                      |
+|    +----+                       |                          |         +------+                    |                       |  Grade : Distinction                     |
+|                                 |                          |                                     |                       |                                          |
++---------------------------------+                          +-------------------------------------+                       |  Go Home                                 |
+                                                                                                                           |  -------                                 |
+                                                                                                                           |                                          |
+                                                                                                                           +------------------------------------------+
+
+
+--> When we enter First Name and Last Name in Page1 and click next a request is generated and send to Page2 . 
+--> At Page2 we enter Percentage and Grade and click Submit and again a request is generated 
+--> But original request of name gets lost , therefore we save the information of name in session
+
+       Session
++-------------------------------+
+|                               |
+| First Name : Aman             |
+| Last Name : Barbuddhe         |
+|                               |
+|                               |
++-------------------------------+
+
+
+---> So the Page3 will get First Name and Last Name from session , after retriving the names session will get destroyed
+---> and Percentage and Grade will come from Request Object sent by Page2
+
+---> Session will be made at Page2 , because Page2 is getting the request object which has First Name and Last Name
+
+
+************************************ Page1.html ************************************
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method="POST" action="Page2.jsp">
+
+First Name : <input type="text" name="fn"> <br>
+Last Name : <input type="text" name="ln"> <br>
+
+<input type="submit" Value="Next">
+
+</form>
+
+
+
+</body>
+</html>
+
+
+************************************ Page2.jsp ************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>  <!-- this implies this page is using session -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+    <%
+    
+    	String fname = request.getParameter("fn");  //here "fn" is there because in html we have passed fn for First Name
+        String lname = request.getParameter("ln");
+    
+    	session.setAttribute("fn",fname);
+    	session.setAttribute("ln",lname);
+    
+    
+    %>
+    
+    <form method = "POST" action="./Page3.jsp">
+    
+    Percentage : <input type="text" name="per"> <br>
+    Grade : <input type="text" name="grade"> <br>
+    
+    <input type="submit" value="Submit"> <br>
+    
+    </form>
+
+</body>
+</html>
+
+
+************************************ Page3.jsp ************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.Date" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<%
+	
+	     //String fn = session.getAttribute("fn"); --> this gives error because it is object by default , we will have to typecast it to string 
+		 String fname = (String) session.getAttribute("fn"); //--> To access data stored in session
+	     String lname = (String) session.getAttribute("ln");
+		 session.invalidate();
+		 
+		 String per = request.getParameter("per");
+		 String grade = request.getParameter("grade");
+	
+		 /*
+		 
+		 This Below can be done by expression tag also
+		 
+		 out.println("First Name : " + fname + "<br>");
+		 out.println("Last  Name : " + lname + "<br>");
+		 
+		 out.println("Percentage : " + per + "<br>");
+		 out.println("Grade : " + grade + "<br>");
+	     */   
+	%>
+	
+	<H1> Marksheet </H1>
+	<hr>
+	<!-- Expression Tag -->
+	First Name : <%= fname %> <br>
+	Last  Name : <%= lname %> <br>
+	Percentage : <%= per %>   <br>
+	Grade      : <%= grade %> <br>
+	
+	Date : <%= new Date() %> <br>
+	<!-- Date : <%= new java.util.Date() %>  this is how we can access any class without importing it -->      
+
+	<a href="./Page1.html"> Go Home </a>     <!-- HyperLink -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
