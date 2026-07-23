@@ -1,0 +1,193 @@
+*********************************  Login.jsp ***********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	String un = request.getParameter("un"); 
+    String pwd = request.getParameter("pwd");
+    
+    if(un.equals("Aman") && pwd.equals("tca")){
+    	
+    	//out.println("Login Success");
+    	
+    	//response.sendRedirect("https://technocompacademy.com");  // to redirect to this link after successful login and this redirection is in GET method , and this can access all resources maybe over the internet or in the project
+    	
+    	// Method 2 of redirect
+    	//RequestDispatcher rd = request.getRequestDispatcher("./Home.jsp"); // this redirection is in POST method , and this can access only resources which are in the project
+    	//rd.forward(request,response);
+    	
+    	
+    	RequestDispatcher rd = request.getRequestDispatcher("./HomeServlet"); // this redirection is to HomeServlet
+    	rd.forward(request,response);
+    	
+    }
+    
+    else{
+    	
+    	out.println("Login Failed <br>");
+    	out.println("<a href='./Login.html'> Go Home </a>");
+    	
+    }
+
+
+%>
+
+
+</body>
+</html>
+
+
+
+********************************* Login.Html ***********************************************
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form method="POST" action="./Login.jsp"> <!--  we use here POST because it is secured information that we are taking and sending to Login.jsp -->
+
+Username : <input type="text" name="un" required> <br>
+Password : <input type="password" name="pwd" required> <br>  <!-- required : to keep this field compulsory to fill -->
+  <!-- if we keep type="password" then stars will appear as we type the password , not the actual letters we are typing for password -->
+  
+  
+  
+<input type="submit" value="Login">
+
+</form>
+
+</body>
+</html>
+
+
+
+
+********************************* Home.jsp ***********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1> Techno Comp Academy </h1>
+<hr>
+Welcome to TCA !!!
+</body>
+</html>
+
+
+********************************* HomeServlet.java ***********************************************
+
+
+package com.tca;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet("/HomeServlet")
+public class HomeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<h1> Techno Comp Academy Pvt.Ltd.");
+		out.println("<hr>");
+		out.println("Hello....");
+		
+		out.close();
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		
+		doGet(request,response);
+		
+		/*
+		  
+     	RequestDispatcher rd = request.getRequestDispatcher("./HomeServlet"); // this redirection is to HomeServlet
+		rd.forward(request,response); 
+  
+  		Login.jsp calls HomeServlet by POST method , in doPost method , there is doGet , which has the Processing logic and this is displayed on web page
+  
+  		without writing this -->
+  		
+  			protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+				doGet(request,response);
+            }
+            
+            
+  		out.println("<h1> Techno Comp Academy Pvt.Ltd.");
+		out.println("<hr>");
+		out.println("Hello....");
+  
+        This output will not get displayed on WebPage
+   
+  
+		 */
+		
+		
+	}
+	
+}
+
+
+
+********************************* Architecture of this whole Application **********************************************
+
+
+ 
+
+
+
+     
+               Login.html                                         Login.jsp
++----------------------------------------------+           +-------------------------+            Success                       +-----------------------+
+|           +--------------------+             |           |                         |----------------------------------------> |                       |
+| Username :|                    |             |           |                         |                                          | Home Page of TCA      |
+|           +--------------------+             |           |                         |                                          |                       |
+|                                              |           |                         |                                          |                       | 
+|           +--------------------+             |           |                         |                                          +-----------------------+
+| Password :|                    |             |           |                         |
+|           +--------------------+             | --------->|                         |
+|                                              |           |                         |
+|          +-------+                           |           |                         |                                          +-----------------------+
+|          | Login |                           |           |                         |                                          | Error Message         |
+|          +-------+                           |           |                         |           Failure                        |                       |
+|                                              |           |                         |----------------------------------------> | Go Home               |
+|                                              |           |                         |                                          | -------               |
++----------------------------------------------+           +-------------------------+                                          +-----------------------+
+                                                                   Validation
+
+
+
+
+
+
+
+
