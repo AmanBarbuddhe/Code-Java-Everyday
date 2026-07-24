@@ -1,0 +1,150 @@
+Directives in JSP --> page , include , taglib
+-----------------
+
+1.Page Directive : 
+
+<%@ page isErrorPage="true" %>
+<%@ page errorPage="error.jsp" %>
+<%@ page import="java.util.Date, java.util.ArrayList, java.util.List " %>
+,etc.
+
+all this are page directives.
+
+===========================================================================================================================================================================================
+
+2.include directive :
+
+--> If we want to add html or jsp file content in any jsp file before translation then we can do it by using 'include' directive.
+
+--> 'include' directives has 'file' attribute where we can specify file name.
+
+--> In header file we have some properties , that can be included in other files in the project , and if change is 
+needed then that change can be done in header file and it will reflect on all the files where header.jsp was included.
+
+***************************************** first.jsp ********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %>
+<%@ include file="header.jsp" %> <!-- it tells JSP engine to include the content of header.jsp(this file can be html also)  -->
+
+<!-- in header file we have some properties , that can be included in other files in the project , 
+and if change is needed then that change can be done in header file and it will reflect on all 
+the files where header.jsp was included -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	out.println("<h1> Hello First , Welcome to TCA");
+
+%>
+
+
+</body>
+</html>
+
+
+***************************************** second.jsp ********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %>
+<%@ include file="header.jsp" %>  <!-- it tells JSP engine to include the content of header.jsp(this file can be html also)  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	out.println("<h1> Hello Second , Welcome to Pune");
+
+%>
+
+
+</body>
+</html>
+
+
+***************************************** header.jsp ********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<center>
+	<h1 style="color:blue"> Techno Comp Academy </h1>
+	<hr style="height: 5px; background: grey">
+</center>
+
+</body>
+</html>
+
+
+===========================================================================================================================================================================================
+
+2.taglib directive :
+
+To use the libraries 
+--------------------
+Download the Jars -
+
+1. jakarta.servlet.jsp.jstl-2.0.0.jar
+2. jakarta.servlet.jsp.jstl-api-2.0.0.jar
+
+after downloading add this in your dynamic web project
+
+after creating new dynamic web project
+
+src-->main-->webapp-->WEB-INF-->lib(paste the two downloaded jar in lib)--> refresh the project(Right Click -> Refresh)
+
+
+***************************************** Demo.jsp ********************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!-- to tell that we are using taglib and uri is url identifier , to tell from where we are using the libraries -->
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- prefix="c" to diffrentiate between taglib and jsp tags , instead of c there can be anything as our wish -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- c used to know that it is taglib's tag -->
+<h1> <c:out value="Advance Java Batch-20"/> </h1>
+
+<!-- For Loop -->
+
+<!-- step is to increment -->
+<c:forEach var="i" begin="1" end="5" step="1" > 
+
+	<h2> <c:out value="${i}"/> : Hello World </h2> <!-- as we want value inside i , therefore ${i} -->
+
+ </c:forEach>
+
+</body>
+</html>
+
+
+
+
