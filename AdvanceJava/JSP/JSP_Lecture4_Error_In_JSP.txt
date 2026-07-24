@@ -1,0 +1,140 @@
+--> In JSP if any exception comes then it has to be redirected to a file called "Handler File"(it can be named anything)
+
+
+    divide.jsp                         array.jsp
++------------------+               +--------------+          
+|                  |               |              |
+|                  |               |              |
+|                  |               |              |
+|                  |               |              | 
++------------------+               +--------------+
+         |                                | 
+         |                                |
+         |                                |
+         |                                | 
+         +--------------------------------+
+                         |
+                         |  
+                         |
+                error.jsp(Handler File)     
+            +----------------------------+
+            |                            |
+            |                            |
+            +----------------------------+
+
+
+--> in this code we made two files divide.jsp and array.jsp and it has errors , now all errors are redirected in 
+error.jsp
+
+
+********************************** divide.jsp **********************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %> <!-- this indicates if any error comes on this page then redirect to error.jsp(Handler File) -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	String n1 = "5";
+	String n2 = "IND";
+
+	double a = Double.parseDouble(n1);
+	double b = Double.parseDouble(n2);
+	
+	double ans = a/b;
+	
+	
+	out.println("Division : " + ans);
+
+%>
+
+</body>
+</html>
+
+
+********************************** array.jsp **********************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page errorPage="error.jsp" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	int a[] = {11,22,33};
+
+	out.println("DATA : " + a[10]);	
+
+%>
+
+
+</body>
+</html>
+
+
+********************************** array.jsp **********************************
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>  <!-- This indicates that if in project anywhere error occurs , then come to this page -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+
+	String message="";
+
+	if(exception instanceof ArrayIndexOutOfBoundsException){
+		message="Wrong Array Index Number";
+	}
+
+	if(exception instanceof NumberFormatException){
+		message="Wrong Array Index Number";
+	}
+
+
+%>
+
+<font color="red"> 
+
+	<%= message %> <!-- if we dont write isErrorPage="true" then on this line there will be error -->
+
+    <!-- Here we used our manual exceptions , if we want default exceptions then remove the both if's and 
+    String message statements and inside the expression tags instead of message write "exception"-->
+
+</font>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
