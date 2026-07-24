@@ -1,0 +1,80 @@
+JSP Scripting Tags
+------------------
+1. Scriplet Tag  -->  <%    %>
+2. Expression Tag --> <%=   %>
+3. Comment Tag -->    <%-- --%>
+4. Declaration Tag--> <%!    %>
+
+--> Declaration tags is used to declare variables and methods
+                                                                                    Servlet
+       first.jsp                                                                First_jsp.java       
++--------------------------------+                                   +------------------------------------------------------------------------+
+|<%!                             |                                   |   public class First_jsp extends HttpServlet{                          |     
+|       int x = 99;              |                                   |                                                                        |     
+|                                |                                   |             int x = 99;               //data member                    |    
+|       public void display(){   |                                   |             public void display(){    //member method                  |     
+|                                |                                   |              }                                                         |      
+|       }                        |                                   |     }                                                                  |     
+|                                |                                   |                                                                        |            
+|                                |                                   |   public void jspService(HttpServlet request , HttpServlet response)   |     
+|%>                              |         Translates                |{                                                                       |            
+|                                |----------------------------->     |              int i = 10;                                               |     
+|<%                              |                                   |                  out.println(i);                                       |     
+|                                |                                   |                                                                        |     
+|    int i=10;                   |                                   |                                                                        |     
+|    out.println(i);             |                                   |                                                                        |     
+|                                |                                   |                  out.println(name);                                    |     
+|%>                              |                                   |                                                                        |     
+|                                |                                   |     }                                                                  |            
+|<%= name %>                     |                                   |                                                                        |     
++--------------------------------+                                   +------------------------------------------------------------------------+ 
+
+--> JSP engine converts first.jsp into First_jsp.java(i.e. Servlet) so after conversion the content inside 
+--> Scriplet and Expression tag comes inside Service method as Local Variables , while content inside Declaration Tag
+--> becomes data members and member method after conversion 
+
+
+************************************** disp.jsp *****************************************
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- Declaration Tag -->
+<%!
+
+	int visited_count=0;
+
+%>
+
+<!-- Scriplet Tag -->
+<%
+   
+	visited_count++;
+         
+%>
+
+<h1>Visited Count : <%= visited_count %></h1>  <!-- Expression Tag -->
+
+<!-- 
+
+  OR
+
+Dont keep Scriplet Tag
+
+
+and in Expression Tag keep : ++visited_count  instead of visited_count
+
+
+-->
+
+</body>
+</html>
+
+
