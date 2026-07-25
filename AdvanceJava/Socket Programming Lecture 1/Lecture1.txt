@@ -1,0 +1,162 @@
+Socket : It is a path which is used to interchange data between two nodes
+
+
+There is only one Socket object but it has two parts :
+
+If node1 writes then node2 reads 
+If node1 reads then node2 writes
+
+
+
+  Server                                                                            Client
++---------+                                                                     +-----------+
+|         |                                                                     |           |
+|         |                                                                     |           |
+|         |       +-----------------------------------------------------+       |           | 
+|         |------>| W                                                 R |------>|           |
+|         |       |-----------------------------------------------------|       |           |
+|         |<------| R                                                  W|<------|           | 
+|         |       +-----------------------------------------------------+       |           |
++---------+                      Socket                                         +-----------+            
+  node1                                                                              node2    
+
+
+Let node1 be Server and node2 be Client (it is just for understanding , nodes can be computers also)
+
+There are two Connection protocols :
+
+1.Connection-Oriented(TCP) --> When we want the assurance that the should be send (ex: when we deposit or 
+                               credit money from bank , that msg should come very early)
+
+2.Connection-less(UDP) --> If there are some packet loss or it is okay if data is delivered late.
+
+
+Programming using socket is called :
+
+Socket Programming / Network Programming
+
+
+*************************************** Server.java ****************************************************
+
+/*
+
+    if we are making a Server the we need ServerSocket class(Required to make connection of socket)
+    socket will be made by Client
+
+*/
+
+import java.io.*;
+import java.net.*;  // to use networking packages like socket , etc.
+
+class Server {
+    
+    public static void main(String[] arg){
+
+        ServerSocket ssob = null;
+        Socket sob = null;
+
+        InputStream is = null;
+        OutputStream os = null;
+
+        DataInputStream dis = null;
+        DataOutputStream dos = null;
+
+        try{
+
+            ssob = new ServerSocket(25000);
+            System.out.println("Server Started !!!");
+            sob = ssob.accept();
+            System.out.println("Client is Connected !!!");
+
+            is = sob.getInputStream();
+            os = sob.getOutputStream();
+
+            dis = new DataInputStream(is);
+            dos = new DataOutputStream(os);
+
+            while(true){
+                String msg = dis.readUTF();
+                if(msg.equals("STOP")){
+                    break;
+                }
+                System.out.println(msg);
+            }
+
+            sob.close();
+            ssob.close();
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+}
+
+
+
+*************************************** Client.java ****************************************************
+
+
+import java.io.*;
+import java.net.*;
+
+public class Client {
+    
+    public static void main(String[] arg){
+        
+        Socket sob = null;
+
+        InputStream is = null;
+        OutputStream os = null;
+
+        DataInputStream dis = null;
+        DataOutputStream dos = null;
+
+        try{
+            sob = new Socket("localhost",25000);
+            is = sob.getInputStream();
+            os = sob.getOutputStream();
+
+            dis = new DataInputStream(is);
+            dos = new DataOutputStream(os);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            while(true){
+
+                System.out.print("Type a Message (STOP): ");
+                String s = br.readLine();
+                dos.writeUTF(s);
+                if(s.equals("STOP")){
+                    break;
+                }
+            }
+            
+            sob.close();
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+}
+
+
+
+To run this code open two separate terminals
+
+1st run Server.java in one terminal
+--> javac Server.java
+--> java Server
+
+Then run Client.java in another terminal
+--> javac Client.java
+--> java Client
+
+
+
+
+
