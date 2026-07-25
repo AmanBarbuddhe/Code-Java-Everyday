@@ -1,0 +1,39 @@
+                                    +-----------------+          
+                                    | Logic Factorial |
+                                    |                 |
+                                    |                 |
+                                    |                 |  Computer1
+                                    |                 |
+                                    |                 |
+                                    +-----------------+     
+                                            |
+                                            |
+                                            |
+                                            |
+                                            |
+                                            |
+                                            |
+                +---------------------------------------------------------------------+                                    
+                |                                |                                    |
+                |                                |                                    |
+                |                                |                                    |
+        +------------+                +-------------------+               +----------------------+
+        |            |                |                   |               |                      |
+        |            |                |                   |               |                      |
+        |     4      |                |        5          |               |         3            |
+        |            |                |                   |               |                      |
+        +------------+                +-------------------+               +----------------------+
+         computer2                        computer3                           computer4
+
+
+
+Computer1 has the logic of factorial , so computer2 , computer3 and computer4 will give only values to Computer1 and get result from there rather than calculating it by themselves
+
+computer1 is our server and computer2 , computer3 and computer4 are our clients
+
+
+
+
+
+
+
