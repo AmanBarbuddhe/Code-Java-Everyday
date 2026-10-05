@@ -1,0 +1,25 @@
+1. Easy and Intuitive
+--> It is easy because its just like english and intuitive because , its easy to write and code in it and not 
+spend time on detailed complexities of code , therefore coders can focus more on logic and maths , etc..
+
+2.Great ecosystem of libraries
+--> for data manipulations : numpy , pandas
+--> for data visualization : matplotlib , seaborn
+--> for ML : TensorFlow , Pytorch
+
+3.Platform Independent 
+--> can easily work on linux , windows and MAC
+
+4.Integration with other tools 
+--> as compared to C/C++ Java , Python is slower , but ML models in python are faster because as C/C++ are low level 
+languages (called low level because they interact with machines more efficiently and fastly) and internal working 
+of many ML models are implemented by this low level languages i.e. speed is acquired from Integration
+
+-->as compared to c/c++ and java python is slower , but ML models in python are faster as they are implemented by low 
+level languages like c/c++ (they are called low level languages as they interact with machine more efficiently and quickly)
+
+5.Rapid Prototyping
+--> Data science , AI , ML are experimental field , for them sometimes we want to write a code that is executed 
+quickly , we dont want spend more time in writing the code , python helps in it.
+
+--> To run python code from terminal : python3 my_code.py
