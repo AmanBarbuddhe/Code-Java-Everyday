@@ -4,8 +4,7 @@ def product(n):
     pdt = 1
 
     while(n>0):
-        a = n % 10
-        pdt *= a
+        pdt *= n % 10
         n = n // 10
 
     return pdt

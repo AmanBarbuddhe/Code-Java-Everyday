@@ -25,3 +25,5 @@ s2 = {3,4,7,8,9,10}
 
 print(s1.union(s2))
 print(s1.intersection(s2))
+
+print(s1[2])

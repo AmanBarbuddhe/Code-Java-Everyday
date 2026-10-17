@@ -19,6 +19,8 @@ def even_odd(n):
 
 n = int(input("Enter your digit :"))
 
+print(type(even_odd(n)))
+
 even , odd = even_odd(n)
 
 print(f"No. of even digit = {even} ,  No. of odd digit = {odd}")
